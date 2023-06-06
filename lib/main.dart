@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_constructors
+
 
 import 'package:flutter/material.dart';
 import 'package:jarvix_application_1/screens/login_screen_1.dart';
@@ -21,7 +21,7 @@ class MyApp extends StatelessWidget {
           primary:  Colors.black,
         ),
       ),
-      home:LoginScreen1(),
+      home:const LoginScreen1(),
     );
   }
 }

@@ -1,4 +1,3 @@
-// ignore_for_file: prefer_const_constructors, sized_box_for_whitespace, prefer_const_literals_to_create_immutables
 
 import 'dart:convert';
 
@@ -39,9 +38,9 @@ class _UserListState extends State<UserList> {
   Size size=MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
-        iconTheme: IconThemeData(color: Colors.black),
+        iconTheme: const IconThemeData(color: Colors.black),
         backgroundColor: backgroundColor,
-        title: Container(
+        title: SizedBox(
           height: 30,
           width: 115,
           child: Image.asset("assets/images/main_screens/app_bar_logo.png",fit: BoxFit.cover,),
@@ -50,7 +49,7 @@ class _UserListState extends State<UserList> {
           Container(
             height: 30,
             width: 110,
-            margin: EdgeInsets.only(right: 30),
+            margin: const EdgeInsets.only(right: 30),
             child: Image.asset("assets/images/main_screens/app_bar_action.png"))
         ],
       ),
@@ -62,13 +61,13 @@ class _UserListState extends State<UserList> {
           SizedBox(
             height: 150,
             child: DrawerHeader(
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                 color: Colors.white,
               ),
               child: Align(
                 alignment: Alignment.bottomLeft,
                 child: Padding(
-                  padding:  EdgeInsets.only(left: 10),
+                  padding:  const EdgeInsets.only(left: 10),
                   child: Text('Menu',style: TextStyle(fontSize: 25,fontWeight: FontWeight.bold,color: Colors.black.withOpacity(0.8)),),
                 )),
             ),
@@ -76,7 +75,7 @@ class _UserListState extends State<UserList> {
           Container(
             height: 400,
             width: size.width,
-            margin: EdgeInsets.symmetric(horizontal: 10,vertical: 10),
+            margin: const EdgeInsets.symmetric(horizontal: 10,vertical: 10),
             child: Column(
               children: [
                 InkWell(
@@ -85,15 +84,15 @@ class _UserListState extends State<UserList> {
                     Navigator.pushReplacement(
                       context, 
                       PageRouteBuilder(
-                          pageBuilder: (context, animation1, animation2) => NewChat(),
+                          pageBuilder: (context, animation1, animation2) => const NewChat(),
                           transitionDuration: Duration.zero,
                           reverseTransitionDuration: Duration.zero,
                       ),
                   );
                   },
                   child: Container(
-                    margin: EdgeInsets.symmetric(horizontal: 20,vertical:5 ),
-                    padding: EdgeInsets.symmetric(horizontal: 15,vertical: 5),
+                    margin: const EdgeInsets.symmetric(horizontal: 20,vertical:5 ),
+                    padding: const EdgeInsets.symmetric(horizontal: 15,vertical: 5),
                     decoration: BoxDecoration(
                       // color: Color(0xffD8EFE8),
                       borderRadius: BorderRadius.circular(5)
@@ -101,7 +100,7 @@ class _UserListState extends State<UserList> {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
+                      children: const [
                         Icon(Icons.add,color: buttonColor,),
                         Padding(
                           padding: EdgeInsets.symmetric(horizontal: 10,vertical: 5),
@@ -112,8 +111,8 @@ class _UserListState extends State<UserList> {
                   ),
                 ),
                 Container(
-                  margin: EdgeInsets.symmetric(horizontal: 20,vertical:5 ),
-                  padding: EdgeInsets.symmetric(horizontal: 15,vertical: 5),
+                  margin: const EdgeInsets.symmetric(horizontal: 20,vertical:5 ),
+                  padding: const EdgeInsets.symmetric(horizontal: 15,vertical: 5),
                   decoration: BoxDecoration(
                     // color: Color(0xffD8EFE8),
                     borderRadius: BorderRadius.circular(5)
@@ -121,7 +120,7 @@ class _UserListState extends State<UserList> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
+                    children: const [
                       Icon(Icons.message_outlined,color: buttonColor,),
                       Padding(
                         padding: EdgeInsets.symmetric(horizontal: 10,vertical: 5),
@@ -131,8 +130,8 @@ class _UserListState extends State<UserList> {
                   ),
                 ),
                 Container(
-                  margin: EdgeInsets.symmetric(horizontal: 20,vertical:5 ),
-                  padding: EdgeInsets.symmetric(horizontal: 15,vertical: 5),
+                  margin: const EdgeInsets.symmetric(horizontal: 20,vertical:5 ),
+                  padding: const EdgeInsets.symmetric(horizontal: 15,vertical: 5),
                   decoration: BoxDecoration(
                     // color: Color(0xffD8EFE8),
                     borderRadius: BorderRadius.circular(5)
@@ -140,7 +139,7 @@ class _UserListState extends State<UserList> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
+                    children: const [
                       Icon(Icons.save,color: buttonColor,),
                       Padding(
                         padding: EdgeInsets.symmetric(horizontal: 10,vertical: 5),
@@ -150,8 +149,8 @@ class _UserListState extends State<UserList> {
                   ),
                 ),
                 Container(
-                  margin: EdgeInsets.symmetric(horizontal: 20,vertical:5 ),
-                  padding: EdgeInsets.symmetric(horizontal: 15,vertical: 5),
+                  margin: const EdgeInsets.symmetric(horizontal: 20,vertical:5 ),
+                  padding: const EdgeInsets.symmetric(horizontal: 15,vertical: 5),
                   decoration: BoxDecoration(
                     // color: Color(0xffD8EFE8),
                     borderRadius: BorderRadius.circular(5)
@@ -159,7 +158,7 @@ class _UserListState extends State<UserList> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
+                    children: const [
                       Icon(Icons.settings,color: buttonColor,),
                       Padding(
                         padding: EdgeInsets.symmetric(horizontal: 10,vertical: 5),
@@ -173,16 +172,16 @@ class _UserListState extends State<UserList> {
                     // Navigator.of(context).push(MaterialPageRoute(builder: (context)=>))
                   },
                   child: Container(
-                    margin: EdgeInsets.symmetric(horizontal: 20,vertical:5 ),
-                    padding: EdgeInsets.symmetric(horizontal: 15,vertical: 5),
+                    margin: const EdgeInsets.symmetric(horizontal: 20,vertical:5 ),
+                    padding: const EdgeInsets.symmetric(horizontal: 15,vertical: 5),
                     decoration: BoxDecoration(
-                      color: Color(0xffD8EFE8),
+                      color: const Color(0xffD8EFE8),
                       borderRadius: BorderRadius.circular(5)
                     ),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
+                      children: const [
                         Icon(Icons.supervised_user_circle_outlined,color: buttonColor,),
                         Padding(
                           padding: EdgeInsets.symmetric(horizontal: 10,vertical: 5),
@@ -193,11 +192,11 @@ class _UserListState extends State<UserList> {
                   ),
                 ),
                 Container(
-                  margin: EdgeInsets.symmetric(vertical: 15,horizontal: 10),
-                  padding: EdgeInsets.all(15),
+                  margin: const EdgeInsets.symmetric(vertical: 15,horizontal: 10),
+                  padding: const EdgeInsets.all(15),
                   height: 80,
                   width: size.width,
-                  decoration: BoxDecoration(
+                  decoration: const BoxDecoration(
                     gradient: LinearGradient(
                       colors: [
                         greenColor,
@@ -210,14 +209,14 @@ class _UserListState extends State<UserList> {
                   child: Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Container(
+                      SizedBox(
                         height: 50,
                         width: 60,
                         child: Image.asset("assets/images/main_screens/crown.png",fit: BoxFit.cover,),
                       ),
-                      SizedBox(width: 8,),
+                      const SizedBox(width: 8,),
                       Column(
-                        children: [
+                        children: const [
                           SizedBox(height: 15,),
                           Text("FULL VERSION: OFFERS",style: TextStyle(fontSize: 14,fontWeight: FontWeight.bold,color: Colors.white),),
                         ],
@@ -237,16 +236,16 @@ class _UserListState extends State<UserList> {
           Expanded(
             child: ListView(
               children: [
-                Container(
+                SizedBox(
                   height: size.height*0.8,
                   width: size.width,
                   child: Column(
                     children: [
                       Padding(
-                        padding: EdgeInsets.all(15),
+                        padding: const EdgeInsets.all(15),
                         // child: Text('USERS LIST',style: TextStyle(fontSize: 24,fontWeight: FontWeight.bold),
                         // ),
-                        child: RichText(text: TextSpan(
+                        child: RichText(text: const TextSpan(
                           text: "USERS ",
                           style: TextStyle(fontSize: 24,fontWeight: FontWeight.bold,color: buttonColor),
                           children: [
@@ -276,7 +275,7 @@ class _UserListState extends State<UserList> {
                                         title: Text('${user.firstName} ${user.lastName}'),
                                         subtitle: Text(user.email),
                                       ),
-                                      Divider(indent: 20,endIndent: 20,color: Colors.grey,),
+                                      const Divider(indent: 20,endIndent: 20,color: Colors.grey,),
                                     ],
                                   );
                                 },
@@ -286,7 +285,7 @@ class _UserListState extends State<UserList> {
                                 child: Text('Error: ${snapshot.error}'),
                               );
                             }
-                            return Center(
+                            return const Center(
                               child: CircularProgressIndicator(),
                             );
                           },
@@ -298,7 +297,7 @@ class _UserListState extends State<UserList> {
             ),
           ),
           Container(
-            padding: EdgeInsets.all(10.0),
+            padding: const EdgeInsets.all(10.0),
             decoration: BoxDecoration(
             color: Colors.white, // Set the background color
               boxShadow: [
@@ -306,7 +305,7 @@ class _UserListState extends State<UserList> {
                   color: Colors.grey.withOpacity(0.4), // Set the shadow color
                   spreadRadius: 2.0, // Set the spread radius
                   blurRadius: 5.0, // Set the blur radius
-                  offset: Offset(0, -3), // Set the offset
+                  offset: const Offset(0, -3), // Set the offset
                 ),
               ],
             ),
@@ -317,11 +316,11 @@ class _UserListState extends State<UserList> {
                   child: TextField(
                               decoration: InputDecoration(
                   hintText: 'Serach User Here..',
-                  suffixIcon: Icon(Icons.send_rounded,color: buttonColor,),
+                  suffixIcon: const Icon(Icons.send_rounded,color: buttonColor,),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(20),
                   ),
-                  contentPadding: EdgeInsets.symmetric(vertical: 8.0,horizontal: 15),
+                  contentPadding: const EdgeInsets.symmetric(vertical: 8.0,horizontal: 15),
                    ),
                    ),
                 ),
