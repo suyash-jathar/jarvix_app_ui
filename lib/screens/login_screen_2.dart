@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors, sized_box_for_whitespace, unused_local_variable, sort_child_properties_last, prefer_const_literals_to_create_immutables
 
 import 'package:flutter/material.dart';
+import 'package:jarvix_application_1/screens/new_chat_scren.dart';
 import 'package:jarvix_application_1/utils/const.dart';
 
 class LoginScreen2 extends StatefulWidget {
@@ -51,26 +52,31 @@ class _LoginScreen2State extends State<LoginScreen2> {
                ),
               ),
             ),
-            Container(
-             margin: EdgeInsets.symmetric(horizontal: 50,vertical: 10),
-             width: size.width,
-             decoration: BoxDecoration(
-              color: Colors.black.withOpacity(0.8),
-              borderRadius: BorderRadius.circular(20),
-             ), 
-             child: Padding(
-               padding: const EdgeInsets.all(10.0),
-               child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                 children: [
-                    Icon(Icons.apple,color: Colors.white,),
-                     SizedBox(width: 10,),
-                    Text('SIGN IN WITH APPLE',style: TextStyle(color: Colors.white),),
-                     SizedBox(width: 10,),
-                 ],
+            InkWell(
+              onTap: (){
+                Navigator.of(context).push(MaterialPageRoute(builder: (context)=>NewChat()));
+              },
+              child: Container(
+               margin: EdgeInsets.symmetric(horizontal: 50,vertical: 10),
+               width: size.width,
+               decoration: BoxDecoration(
+                color: Colors.black.withOpacity(0.8),
+                borderRadius: BorderRadius.circular(20),
+               ), 
+               child: Padding(
+                 padding: const EdgeInsets.all(10.0),
+                 child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                   children: [
+                      Icon(Icons.apple,color: Colors.white,),
+                       SizedBox(width: 10,),
+                      Text('SIGN IN WITH APPLE',style: TextStyle(color: Colors.white),),
+                       SizedBox(width: 10,),
+                   ],
+                 ),
                ),
-             ),
+              ),
             ),
             InkWell(
               onTap: (){},

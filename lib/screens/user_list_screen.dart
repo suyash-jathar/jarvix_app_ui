@@ -1,16 +1,39 @@
 // ignore_for_file: prefer_const_constructors, sized_box_for_whitespace, prefer_const_literals_to_create_immutables
 
-import 'package:flutter/material.dart';
-import 'package:jarvix_application_1/screens/user_list_screen.dart';
-import 'package:jarvix_application_1/utils/const.dart';
+import 'dart:convert';
 
-class NewChat extends StatefulWidget {
-  const NewChat({super.key});
+import 'package:flutter/material.dart';
+import 'package:jarvix_application_1/screens/new_chat_scren.dart';
+import 'package:jarvix_application_1/utils/const.dart';
+import 'package:http/http.dart' as http;
+import '../models/user.dart';
+
+class UserList extends StatefulWidget {
+  const UserList({super.key});
   @override
-  State<NewChat> createState() => _NewChatState();
+  State<UserList> createState() => _UserListState();
 }
 
-class _NewChatState extends State<NewChat> {
+class _UserListState extends State<UserList> {
+  Future<List<User>> fetchUsers() async {
+    final response = await http.get(Uri.parse("https://reqres.in/api/users?page=2"));
+
+    if (response.statusCode == 200) {
+      final jsonData = json.decode(response.body);
+      final userList = jsonData['data'] as List<dynamic>;
+
+      return userList.map((userData) => User.fromJson(userData)).toList();
+    } else {
+      throw Exception('Failed to fetch users');
+    }
+  }
+  late Future<List<User>> _users;
+
+  @override
+  void initState() {
+    super.initState();
+    _users = fetchUsers();
+  }
   @override
   Widget build(BuildContext context) {
   Size size=MediaQuery.of(context).size;
@@ -56,23 +79,36 @@ class _NewChatState extends State<NewChat> {
             margin: EdgeInsets.symmetric(horizontal: 10,vertical: 10),
             child: Column(
               children: [
-                Container(
-                  margin: EdgeInsets.symmetric(horizontal: 20,vertical:5 ),
-                  padding: EdgeInsets.symmetric(horizontal: 15,vertical: 5),
-                  decoration: BoxDecoration(
-                    color: Color(0xffD8EFE8),
-                    borderRadius: BorderRadius.circular(5)
-                  ),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Icon(Icons.add,color: buttonColor,),
-                      Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 10,vertical: 5),
-                        child: Text('New Chat',style: TextStyle(fontSize: 15),),
-                        ),
-                    ],
+                InkWell(
+                  onTap: (){
+                    // Navigator.of(context).push(MaterialPageRoute(builder: (context)=>NewChat()));
+                    Navigator.pushReplacement(
+                      context, 
+                      PageRouteBuilder(
+                          pageBuilder: (context, animation1, animation2) => NewChat(),
+                          transitionDuration: Duration.zero,
+                          reverseTransitionDuration: Duration.zero,
+                      ),
+                  );
+                  },
+                  child: Container(
+                    margin: EdgeInsets.symmetric(horizontal: 20,vertical:5 ),
+                    padding: EdgeInsets.symmetric(horizontal: 15,vertical: 5),
+                    decoration: BoxDecoration(
+                      // color: Color(0xffD8EFE8),
+                      borderRadius: BorderRadius.circular(5)
+                    ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Icon(Icons.add,color: buttonColor,),
+                        Padding(
+                          padding: EdgeInsets.symmetric(horizontal: 10,vertical: 5),
+                          child: Text('New Chat',style: TextStyle(fontSize: 15),),
+                          ),
+                      ],
+                    ),
                   ),
                 ),
                 Container(
@@ -134,21 +170,13 @@ class _NewChatState extends State<NewChat> {
                 ),
                 InkWell(
                   onTap: (){
-                    // Navigator.of(context).push(MaterialPageRoute(builder: (context)=>UserList()));
-                    Navigator.pushReplacement(
-                        context, 
-                        PageRouteBuilder(
-                            pageBuilder: (context, animation1, animation2) => UserList(),
-                            transitionDuration: Duration.zero,
-                            reverseTransitionDuration: Duration.zero,
-                        ),
-                    );
+                    // Navigator.of(context).push(MaterialPageRoute(builder: (context)=>))
                   },
                   child: Container(
                     margin: EdgeInsets.symmetric(horizontal: 20,vertical:5 ),
                     padding: EdgeInsets.symmetric(horizontal: 15,vertical: 5),
                     decoration: BoxDecoration(
-                      // color: Color(0xffD8EFE8),
+                      color: Color(0xffD8EFE8),
                       borderRadius: BorderRadius.circular(5)
                     ),
                     child: Row(
@@ -209,7 +237,63 @@ class _NewChatState extends State<NewChat> {
           Expanded(
             child: ListView(
               children: [
-                // Your main content here
+                Container(
+                  height: size.height*0.8,
+                  width: size.width,
+                  child: Column(
+                    children: [
+                      Padding(
+                        padding: EdgeInsets.all(15),
+                        // child: Text('USERS LIST',style: TextStyle(fontSize: 24,fontWeight: FontWeight.bold),
+                        // ),
+                        child: RichText(text: TextSpan(
+                          text: "USERS ",
+                          style: TextStyle(fontSize: 24,fontWeight: FontWeight.bold,color: buttonColor),
+                          children: [
+                            TextSpan(
+                              text: "LIST",
+                              style: TextStyle(fontSize: 24,fontWeight: FontWeight.bold,color: Colors.black),
+                            )
+                          ]
+                        )),
+                        ),
+                      Expanded(
+                        child: FutureBuilder<List<User>>(
+                          future: _users,
+                          builder: (context, snapshot) {
+                            if (snapshot.hasData) {
+                              final users = snapshot.data!;
+                              return ListView.builder(
+                                itemCount: users.length,
+                                itemBuilder: (context, index) {
+                                  final user = users[index];
+                                  return Column(
+                                    children: [
+                                      ListTile(
+                                        leading: CircleAvatar(
+                                          backgroundImage: NetworkImage(user.avatar),
+                                        ),
+                                        title: Text('${user.firstName} ${user.lastName}'),
+                                        subtitle: Text(user.email),
+                                      ),
+                                      Divider(indent: 20,endIndent: 20,color: Colors.grey,),
+                                    ],
+                                  );
+                                },
+                              );
+                            } else if (snapshot.hasError) {
+                              return Center(
+                                child: Text('Error: ${snapshot.error}'),
+                              );
+                            }
+                            return Center(
+                              child: CircularProgressIndicator(),
+                            );
+                          },
+                        ),
+                      ),
+              ]),
+                ),
               ],
             ),
           ),
@@ -232,21 +316,15 @@ class _NewChatState extends State<NewChat> {
                 Expanded(
                   child: TextField(
                               decoration: InputDecoration(
-                  hintText: 'Type Here..',
+                  hintText: 'Serach User Here..',
                   suffixIcon: Icon(Icons.send_rounded,color: buttonColor,),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(20),
                   ),
                   contentPadding: EdgeInsets.symmetric(vertical: 8.0,horizontal: 15),
-                              ),
-                              onChanged: (value) {
-                  // Handle search query changes
-                              },
-                            ),
+                   ),
+                   ),
                 ),
-                Padding(
-                  padding: EdgeInsets.all(15),
-                  child: Icon(Icons.save_outlined,color: greenColor,))
               ],
             )
           ),
